@@ -1,0 +1,27 @@
+.form-container{
+    text-align: center;
+}
+input[type=text], input[type=number]{
+    width: 25%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+
+}
+.add, .back{
+    height: 50px;
+    width: 100px;
+    margin-left: 5px;
+    border-radius: 5px;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+}
+.add{
+    background-color: green;
+}
+.back{
+    background-color: red;
+}

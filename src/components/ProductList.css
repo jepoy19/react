@@ -1,0 +1,30 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.editBtn, .deleteBtn{
+  height: 30px;
+  width: 70px;
+  margin-right: 10px;
+  border-radius: 5px;
+  color: white;
+  border-style: none;
+  cursor: pointer;
+}
+.editBtn {
+  background-color: rgb(14, 140, 230);
+}
+.deleteBtn {
+  background-color: rgb(230, 70, 70);
+}
