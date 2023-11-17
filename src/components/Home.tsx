@@ -1,59 +1,103 @@
-import {useState} from "react"
-import "./Home.css"
-import { ProductList } from "./ProductList"
-import { PageEnum, iProducts } from "./Product"
-import { sampleProducts } from "./Product"
-import AddProduct from "./AddProduct"
-import EditProduct from "./EditProduct"
+import { useEffect, useState } from "react";
+import "./Home.css";
+import { ProductList } from "./ProductList";
+import { PageEnum, iProduct } from "./Product";
+import AddProduct from "./AddProduct";
+import EditProduct from "./EditProduct";
+import React from "react";
+
 const Home = () => {
-    const [product, setProduct] = useState(sampleProducts as iProducts[]);
-    const [showPage, setShowPage] = useState(PageEnum.list)
-    const showListPage = () => {
-        setShowPage(PageEnum.list)
+  const [product, setProduct] = useState([] as iProduct[]);
+  const [showPage, setShowPage] = useState(PageEnum.list);
+  const [dataToEdit, setDataToEdit] = useState({} as iProduct);
+
+  useEffect(() => {
+    const listInString = window.localStorage.getItem("Products");
+    if (listInString) {
+      _setProduct(JSON.parse(listInString));
     }
+  }, []);
+  const showListPage = () => {
+    setShowPage(PageEnum.list);
+  };
 
-    const HandleAdd = () => {
-        setShowPage(PageEnum.add)
-    }
+  const _setProduct = (list: iProduct[]) => {
+    setProduct(list);
+    window.localStorage.setItem("Products", JSON.stringify(list));
+  };
 
-    const addProductHandle = (data: iProducts) => {
-        setProduct([...product, data])
-    }
+  const HandleAdd = () => {
+    setShowPage(PageEnum.add);
+  };
 
-    const deleteProduct = (data: iProducts) => {
-        const indexToDelete = product.indexOf(data);
-        const tempList = [...product]
-        tempList.splice(indexToDelete, 1)
-        setProduct(tempList);
-    }
+  const addProductHandle = (data: iProduct) => {
+    _setProduct([...product, data]);
+  };
 
-    const editProduct = (data: iProducts) => {
+  const deleteProduct = (data: iProduct) => {
+    const indexToDelete = product.indexOf(data);
+    const tempList = [...product];
+    tempList.splice(indexToDelete, 1);
+    _setProduct(tempList);
+  };
 
-    }
+  const editProduct = (data: iProduct) => {
+    setShowPage(PageEnum.edit);
+    setDataToEdit(data);
+  };
+  const updateProduct = (data: iProduct) => {
+    const filteredData = product.filter((x) => x.id === data.id)[0];
+    const indexOfRecord = product.indexOf(filteredData);
+    const tempData = [...product];
+    tempData[indexOfRecord] = data;
+    _setProduct(tempData);
+  };
 
-   return(
+  const logOut = () => {
+    window.location.href = "./";
+  };
+  return (
     <>
-    <article className="article-header">
+      <article className="article-header">
         <header>
-            <h1>PRODUCTS</h1>
+          <h1>PRODUCTS</h1>
+          <button onClick={logOut} className="logout">
+            Log out
+          </button>
         </header>
-    </article>
-    <section className="section-content">
-    {showPage === PageEnum.list &&(
-        <>
-        <input type="button" value="Add Product" onClick={HandleAdd} className="addProductBtn"/>
-        <ProductList list={product} 
-        onDeleteHandle={deleteProduct} 
-        onEdithandle={editProduct}
-        />
-        </>
-    )}
-    {showPage === PageEnum.add && <AddProduct backBtn={showListPage} onSubmitHandle={addProductHandle}/> }
-    {showPage === PageEnum.edit && <EditProduct />}
-    </section>
+      </article>
+      <section className="section-content">
+        {showPage === PageEnum.list && (
+          <>
+            <input
+              type="button"
+              value="Add Product"
+              onClick={HandleAdd}
+              className="addProductBtn"
+            />
+            <ProductList
+              list={product}
+              onDeleteHandle={deleteProduct}
+              onEditHandle={editProduct}
+            />
+          </>
+        )}
+        {showPage === PageEnum.add && (
+          <AddProduct
+            backBtn={showListPage}
+            onSubmitHandle={addProductHandle}
+          />
+        )}
+        {showPage === PageEnum.edit && (
+          <EditProduct
+            data={dataToEdit}
+            backBtn={showListPage}
+            onUpdateClick={updateProduct}
+          />
+        )}
+      </section>
     </>
-   ) 
-    
-}
+  );
+};
 
 export default Home;

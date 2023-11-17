@@ -1,0 +1,22 @@
+.about{
+    width: 1322px;
+    height: 519px;
+    color: #272222;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: auto;
+}
+
+.title{
+    width: 115px;
+    height: 34px;
+    color: #161414;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

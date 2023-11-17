@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,12 +10,25 @@
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": false,
-    "isolatedModules": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ]
   },
   "include": [
     "src"
-  ]
+, "src/components/myDatabase.js"  ],
+  "paths": {
+    "crypto": [
+      "node_modules/crypto-browserify"
+    ],
+    "stream": [
+      "node_modules/stream-browserify"
+    ]
+  }
 }
