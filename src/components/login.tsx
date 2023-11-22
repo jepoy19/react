@@ -9,8 +9,8 @@ function Login({ onLoginUpdate }) {
 
   const handleSubmit = () => {
     if (
-      email.current.value === "j@gmail.com" &&
-      password.current.value === "123"
+      email.current?.value === "j@gmail.com" &&
+      password.current?.value === "123"
     ) {
       localStorage.setItem("email", "j@gmail.com");
       localStorage.setItem("password", "123");
@@ -40,7 +40,7 @@ function Login({ onLoginUpdate }) {
               required
             />
           </div>
-          <button className="loginButton" type="submit">
+          <button className="loginButton" type="submit" onClick={onLoginUpdate}>
             LOGIN
           </button>
         </form>

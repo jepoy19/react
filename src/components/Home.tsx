@@ -6,38 +6,10 @@ import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 import React from "react";
 
-const express = require("express");
-const mongoose = require("mongoose");
-const app = express();
-
-const uri = "mongodb+srv://rogelio:rogelio@cluster0.skl1wfg.mongodb.net/crud";
-
-async function connect() {
-  try {
-    await mongoose.connect(uri);
-    console.log("Connected!!");
-  } catch (error) {
-    console.log(error);
-  }
-}
-connect();
-
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
-});
-
 const Home = () => {
   const [product, setProduct] = useState([] as iProduct[]);
   const [showPage, setShowPage] = useState(PageEnum.list);
   const [dataToEdit, setDataToEdit] = useState({} as iProduct);
-
-  const productSchema = new mongoose.Schema({
-    id: new Date().toJSON().toString(),
-    productname: String,
-    quantity: Number,
-    unit_price: Number,
-    require: true,
-  });
 
   useEffect(() => {
     const listInString = window.localStorage.getItem("Products");
@@ -51,9 +23,7 @@ const Home = () => {
 
   const _setProduct = (list: iProduct[]) => {
     setProduct(list);
-    // window.localStorage.setItem("Products", JSON.stringify(list));
-    const collection = new mongoose.model("Products", productSchema);
-    collection.insertMany([list]);
+    window.localStorage.setItem("Products", JSON.stringify(list));
   };
 
   const HandleAdd = () => {
