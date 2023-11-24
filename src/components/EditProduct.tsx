@@ -1,12 +1,12 @@
-import { iProduct } from "./Product";
+import { IProduct } from "./Product";
 import "./AddProduct.css";
 import { useState } from "react";
 import React from "react";
 
 type Props = {
-  data: iProduct;
+  data: IProduct;
   backBtn: () => void;
-  onUpdateClick: (data: iProduct) => void;
+  onUpdateClick: (data: IProduct) => void;
 };
 
 const EditProduct = (props: Props) => {
@@ -30,13 +30,13 @@ const EditProduct = (props: Props) => {
 
   const handleBtnSubmit = (e: any) => {
     e.preventDefault();
-    const updatedData: iProduct = {
-      id: data.id,
+    const data: IProduct = {
       productname: addproduct,
       quantity: addquantity,
       unit_price: addprice,
     };
-    onUpdateClick(updatedData);
+    onUpdateClick(data);
+    console.log("%c Line:40 🍤 data", "color:#f5ce50", data);
     backBtn();
   };
 

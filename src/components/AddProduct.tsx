@@ -1,17 +1,18 @@
 import "./AddProduct.css";
 import { useState } from "react";
-import { iProduct } from "./Product";
+import { IProduct } from "./Product";
 import React from "react";
+
 type Props = {
   backBtn: () => void;
-  onSubmitHandle: (data: iProduct) => void;
+  onSubmitHandler: (data: IProduct) => void;
 };
 const AddProduct = (props: Props) => {
   const [addproduct, setAddProduct] = useState("");
   const [addquantity, setAddQuantity] = useState("");
   const [addprice, setAddPrice] = useState("");
 
-  const { backBtn, onSubmitHandle } = props;
+  const { backBtn, onSubmitHandler } = props;
 
   const handleProduct = (e: any) => {
     setAddProduct(e.target.value);
@@ -24,16 +25,15 @@ const AddProduct = (props: Props) => {
   const handlePrice = (e: any) => {
     setAddPrice(e.target.value);
   };
-
   const handleBtnSubmit = (e: any) => {
     e.preventDefault();
-    const data: iProduct = {
-      id: new Date().toJSON().toString(),
+
+    const data: IProduct = {
       productname: addproduct,
       quantity: addquantity,
       unit_price: addprice,
     };
-    onSubmitHandle(data);
+    onSubmitHandler(data);
     backBtn();
   };
   return (
@@ -78,7 +78,7 @@ const AddProduct = (props: Props) => {
             onClick={backBtn}
           />
           <input
-            type="button"
+            type="submit"
             value="Add Product"
             className="add"
             onClick={handleBtnSubmit}

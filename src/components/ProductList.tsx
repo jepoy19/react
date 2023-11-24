@@ -1,10 +1,10 @@
 import "./ProductList.css";
-import { iProduct } from "./Product";
+import { IProduct } from "./Product";
 import React from "react";
 type Props = {
-  list: iProduct[];
-  onDeleteHandle: (data: iProduct) => void;
-  onEditHandle: (data: iProduct) => void;
+  list: IProduct[];
+  onDeleteHandle: (data: IProduct) => void;
+  onEditHandle: (data: IProduct) => void;
 };
 export const ProductList = (props: Props) => {
   const { list, onDeleteHandle, onEditHandle } = props;
@@ -20,7 +20,7 @@ export const ProductList = (props: Props) => {
         {list.map((product) => {
           return (
             <>
-              <tr key={product.id}>
+              <tr>
                 <td>{`${product.productname}`}</td>
                 <td>{`${product.quantity}`}</td>
                 <td>{`${product.unit_price}`}</td>
